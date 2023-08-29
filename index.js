@@ -4,41 +4,54 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 
 // TODO: Create an array of questions for user input
-const questions = [];
-
-inquirer
-  .prompt([
-    {
-      type: 'input',
-      name: 'name',
-      message: 'What is your name?',
-    },
-    {
-      type: 'input',
-      name: 'location',
-      message: 'Where are you from?',
-    },
-    {
-      type: 'input',
-      name: 'hobby',
-      message: 'What is your favorite hobby?',
-    },
-    {
-      type: 'input',
-      name: 'food',
-      message: 'What is your favorite food?',
-    },
-    {
-      type: 'input',
-      name: 'github',
-      message: 'Enter your GitHub Username',
-    },
-    {
-      type: 'input',
-      name: 'linkedin',
-      message: 'Enter your LinkedIn URL.',
-    },
-  ])
+const questions = [
+  {
+    type: 'input',
+    name: 'title',
+    message: 'What is the projects title? ',
+  },
+  {
+    type: 'input',
+    name: 'description',
+    message: 'Please provide a description of your project',
+  },
+  {
+    type: 'input',
+    name: 'install',
+    message: 'If necessary, provide the installation instructions',
+  },
+  {
+    type: 'input',
+    name: 'usage',
+    message: 'Provide a example of your project and instructions on how to use it',
+  },
+  {
+    type: 'input',
+    name: 'contributing',
+    message: 'If necessary, provide guidelines on how others can contribute to the project',
+  },
+  {
+    type: 'input',
+    name: 'test',
+    message: 'If necessary, provide any tests for the project and provide examples on how to run them',
+  },
+  {
+    type: 'list',
+    name: 'license',
+    message: 'Which license did you use?',
+    choices: ['GNU AGPLv3', 'GNU GPLv3', 'GNU LGPLv3', 'Mozilla Public License 2.0', 'Apache License 2.0', 'MIT License', 'Boost Software License 1.0', 'The Unlicense'],
+  },
+  {
+    type: 'input',
+    name: 'github',
+    message: 'Enter your GitHub Username',
+  },
+  {
+    type: 'input',
+    name: 'email',
+    message: 'Enter your email address',
+  }
+];
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {}
@@ -70,15 +83,20 @@ const generateHTML = ({ name, location, github, linkedin }) =>
 // TODO: Create a function to initialize app
 function init() {}
 
+inquirer
+  .prompt([
+    ,
+  ])  .then((answers) => {
+    const readMeContent = generateREADME(answers);
+
+    fs.writeFile('README.MD', readMeContent, (err) =>
+      err ? console.log(err) : console.log('Successfully created index.html!')
+    );
+  });
+
 // Function call to initialize app
 init();
 
 
 
-  .then((answers) => {
-    const htmlPageContent = generateHTML(answers);
 
-    fs.writeFile('index.html', htmlPageContent, (err) =>
-      err ? console.log(err) : console.log('Successfully created index.html!')
-    );
-  });
