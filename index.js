@@ -13,27 +13,27 @@ const questions = [
   {
     type: 'input',
     name: 'description',
-    message: 'Please provide a description of your project',
+    message: 'Please provide a description of your project.',
   },
   {
     type: 'input',
     name: 'install',
-    message: 'If necessary, provide the installation instructions',
+    message: 'If necessary, provide the installation instructions.',
   },
   {
     type: 'input',
     name: 'usage',
-    message: 'Provide a example of your project and instructions on how to use it',
+    message: 'Provide a example of your project and instructions on how to use it.',
   },
   {
     type: 'input',
     name: 'contributing',
-    message: 'If necessary, provide guidelines on how others can contribute to the project',
+    message: 'If necessary, provide guidelines on how others can contribute to the project.',
   },
   {
     type: 'input',
     name: 'test',
-    message: 'If necessary, provide any tests for the project and provide examples on how to run them',
+    message: 'If necessary, provide any tests for the project and provide examples on how to run them.',
   },
   {
     type: 'list',
@@ -44,17 +44,17 @@ const questions = [
   {
     type: 'input',
     name: 'github',
-    message: 'Enter your GitHub Username',
+    message: 'Enter your GitHub Username:',
   },
   {
     type: 'input',
     name: 'email',
-    message: 'Enter your email address',
+    message: 'Enter your email address:',
   }
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) { }
 
 const generateHTML = ({ name, location, github, linkedin }) =>
   `<!DOCTYPE html>
@@ -81,21 +81,20 @@ const generateHTML = ({ name, location, github, linkedin }) =>
 </html>`;
 
 // TODO: Create a function to initialize app
-function init() {}
-
-inquirer
-  .prompt([
-    ,
-  ])  .then((answers) => {
-    const readMeContent = generateREADME(answers);
-
-    fs.writeFile('README.MD', readMeContent, (err) =>
-      err ? console.log(err) : console.log('Successfully created index.html!')
-    );
-  });
+function init() {
+  inquirer.prompt(questions)
+    .then((inquiererResponses, data) => {
+      fs.writeFile('README.MD', inquiererResponses, data);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+}
 
 // Function call to initialize app
 init();
+
+
 
 
 
