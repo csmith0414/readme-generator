@@ -64,25 +64,17 @@ function writeToFile (fileName, data) {
 
 // TODO: Create a function to initialize app
 function init() {
-  try {
-
-    // Prompt Inquirer questions
-    const userResponses = inquirer.prompt(questions);
-
-    // Call GitHub api for user info
-    const userInfo = api.getUser(userResponses);
-
-    // Pass Inquirer userResponses and GitHub userInfo to generateMarkdown
-    const markdown = generateMarkdown(userResponses, userInfo);
-    console.log(markdown);
-
-    // Write markdown to file
-     writeFileAsync('ExampleREADME.md', markdown);
-
-} catch (error) {
-    console.log(error);
-}
-};
+  return inquirer.prompt(questions);
+ };
 
 // Function call to initialize app
-init();
+init()
+.then(userInput => {
+  return generateMarkdown(userInput);
+})
+.then(readmeInfo => {
+  return writeToFile(readmeInfo);
+})
+.catch(err => {
+  console.log(err);
+});
