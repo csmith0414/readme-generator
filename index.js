@@ -2,6 +2,7 @@
 
 const inquirer = require('inquirer');
 const fs = require('fs');
+const generateMarkdown = require('./utils/generateMarkdown.js');
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -54,48 +55,34 @@ const questions = [
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) { }
-
-const generateHTML = ({ name, location, github, linkedin }) =>
-  `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
-  <title>Document</title>
-</head>
-<body>
-  <header class="p-5 mb-4 header bg-light">
-    <div class="container">
-      <h1 class="display-4">Hi! My name is ${name}</h1>
-      <p class="lead">I am from ${location}.</p>
-      <h3>Example heading <span class="badge bg-secondary">Contact Me</span></h3>
-      <ul class="list-group">
-        <li class="list-group-item">My GitHub username is ${github}</li>
-        <li class="list-group-item">LinkedIn: ${linkedin}</li>
-      </ul>
-    </div>
-  </header>
-</body>
-</html>`;
+function writeToFile (fileName, data) { 
+  fs.writeFile(fileName, data, err => {
+    if (err) {
+      return console.log(err);
+    }
+  })};
 
 // TODO: Create a function to initialize app
 function init() {
-  inquirer.prompt(questions)
-    .then((inquiererResponses, data) => {
-      fs.writeFile('README.MD', inquiererResponses, data);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+  try {
+
+    // Prompt Inquirer questions
+    const userResponses = inquirer.prompt(questions);
+
+    // Call GitHub api for user info
+    const userInfo = api.getUser(userResponses);
+
+    // Pass Inquirer userResponses and GitHub userInfo to generateMarkdown
+    const markdown = generateMarkdown(userResponses, userInfo);
+    console.log(markdown);
+
+    // Write markdown to file
+     writeFileAsync('ExampleREADME.md', markdown);
+
+} catch (error) {
+    console.log(error);
 }
+};
 
 // Function call to initialize app
 init();
-
-
-
-
-
-
