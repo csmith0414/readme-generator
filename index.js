@@ -74,7 +74,4 @@ init()
 })
 .then(readmeInfo => {
   return writeToFile(readmeInfo);
-})
-.catch(err => {
-  console.log(err);
 });
