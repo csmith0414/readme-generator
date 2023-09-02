@@ -18,7 +18,7 @@ const questions = [
   },
   {
     type: 'input',
-    name: 'install',
+    name: 'installation',
     message: 'If necessary, provide the installation instructions.',
   },
   {
@@ -33,14 +33,14 @@ const questions = [
   },
   {
     type: 'input',
-    name: 'test',
+    name: 'tests',
     message: 'If necessary, provide any tests for the project and provide examples on how to run them.',
   },
   {
     type: 'list',
-    name: 'license',
+    name: 'licenses',
     message: 'Which license did you use?',
-    choices: ['GNU AGPLv3', 'GNU GPLv3', 'GNU LGPLv3', 'Mozilla Public License 2.0', 'Apache License 2.0', 'MIT License', 'Boost Software License 1.0', 'The Unlicense'],
+    choices: ['MIT', 'GPLv3', 'Apache_2.0'],
   },
   {
     type: 'input',
@@ -73,5 +73,5 @@ init()
   return generateMarkdown(userInput);
 })
 .then(readmeInfo => {
-  return writeToFile(readmeInfo);
+  return writeToFile("./output/README.md",readmeInfo);
 });

@@ -6,7 +6,7 @@ function renderLicenseBadge(license) {
   if (!license) {
     return ``;
   } else {
-    return `[![${license} license](https://img.shields.io/badge/License-${license}-blue.svg)](${renderLicenseLink(license)})`
+    return `[![License: ${license}](https://img.shields.io/badge/License-${license}-blue.svg)](${renderLicenseLink(license)})`
   }
 }
 
@@ -16,10 +16,10 @@ function renderLicenseLink(license) {
   if (license === 'MIT') {
     return `https://lbesson.mit-license.org/`
   }
-  if (license === 'GPL') {
+  if (license === 'GPLv3') {
     return `http://perso.crans.org/besson/LICENSE.html`
   }
-  if (license === 'CC--0') {
+  if (license === 'Apache_2.0') {
     return `https://creativecommons.org/licenses/by-nd/4.0` 
   }
 }
@@ -73,8 +73,6 @@ function generateMarkdown(data) {
   GitHub: https://github.com/${data.github}  
   Email: ${data.email}
 
-  ## Credits
-  ${data.name}
 `;
 }
 
