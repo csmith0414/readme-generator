@@ -12,6 +12,7 @@ Using starter code create a professional README generator with the below functio
 - Enter in email address
 - Add a clickable table of contents to natigate through the generated README
 
+![README example video](./video/example.webm)
 
 ## Usage
 
